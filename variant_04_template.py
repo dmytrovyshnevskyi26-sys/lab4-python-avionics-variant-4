@@ -1,18 +1,27 @@
 """
 Лабораторна робота: Варіант 4
-Студент: [Прізвище, Ім'я]
-Група: [Назва групи]
+Студент: [Вишневський Дмитро]
+Група: [EIP30]
 """
 
 # Задача 1: Кут входження в атмосферу (if/elif/else)
-def check_entry_angle(gamma: float) -> str:
+def check_entry_angle(angle: float) -> str:
     """
     Оцінює кут входження gamma (градуси):
     - gamma > -5.5 -> "Рикошет від атмосфери"
     - gamma < -7.5 -> "Перегрів та руйнування"
     - -7.5 <= gamma <= -5.5 -> "Вхід успішний"
     """
-    ...
+    angle = float(input("Enter the value of entrance angle: "))
+    if angle > -5.5:
+        print("Рикошет від атмосфери")
+        return("Рикошет від атмосфери")
+    elif angle < -7.5:
+        print("Перегрів та руйнування")
+        return("Перегрів та руйнування")
+    else:
+        print("Вхід успішний")
+        return("Вхід успішний")
 
 # Задача 2: Статус сопел орієнтації (match-case)
 def check_nozzle_status(data: dict) -> str:
