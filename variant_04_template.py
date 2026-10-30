@@ -44,13 +44,21 @@ def nozzle_stats(nozzle_id: int, pressure: float, temperature: float) -> str:
                 return ("Невідповідні вхідні дані")
 
 # Задача 3: Перевірка цілісності пакета (for / else)
-def verify_telemetry_packet(packet: list) -> str:
+def verify_telemetry_packet(checksums: list) -> str:
     """
     Перевіряє байти пакета. Якщо знайдено 0xFF -> негайно перериває (break)
     і повертає "Помилка пакета: виявлено 0xFF".
     Якщо цикл завершився без break -> повертає через else: "Пакет валідний".
     """
-    ...
+    for byte in checksums:
+        if byte == 0xFF:
+            print("Виявлено байт помилки 0xFF! Обробку зупинено.")
+            result = "Пакет пошкоджено"
+            break
+            return("Пакет пошкоджено")
+        else:
+            result = "Пакет валідний"
+            return("Пакет валідний")
 
 # Задача 4: Пошук втрати GPS (zip / enumerate)
 def find_gps_loss_moments(time_list: list, sats_list: list) -> list:
@@ -58,4 +66,13 @@ def find_gps_loss_moments(time_list: list, sats_list: list) -> list:
     За допомогою zip та enumerate знаходить перші 3 моменти часу (time),
     коли кількість супутників sats < 4.
     """
-    ...
+    found_count = 0
+    loss_moments = []
+    for index, (t, sat) in enumerate(zip(time_list, sats_list)):
+        if sat < 4:
+            print(f"Індекс: {index}, Час: {t}, Кількість супутників: {sat}")
+            found_count += 1
+            loss_moments.append((t, sat))
+            if found_count == 3:
+                break
+        return loss_moments
