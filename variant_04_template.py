@@ -55,10 +55,10 @@ def verify_telemetry_packet(checksums: list) -> str:
             print("Виявлено байт помилки 0xFF! Обробку зупинено.")
             result = "Пакет пошкоджено"
             break
-            return("Пакет пошкоджено")
         else:
             result = "Пакет валідний"
-            return("Пакет валідний")
+    return(result)
+            
 
 # Задача 4: Пошук втрати GPS (zip / enumerate)
 def find_gps_loss_moments(time_list: list, sats_list: list) -> list:
