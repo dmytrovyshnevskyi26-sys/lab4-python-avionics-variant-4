@@ -24,14 +24,24 @@ def check_entry_angle(angle: float) -> str:
         return("Вхід успішний")
 
 # Задача 2: Статус сопел орієнтації (match-case)
-def check_nozzle_status(data: dict) -> str:
+def nozzle_stats(nozzle_id: int, pressure: float, temperature: float) -> str:
     """
     Зіставляє словник {'nozzle_id': int, 'temp': float, 'pressure': float}:
     - temp > 400 -> "Перегрів сопла {id}"
     - pressure < 1.2 -> "Витік палива в соплі {id}"
     - штатно -> "Сопло {id} працює штатно"
     """
-    ...
+    match {'nozzle_id': nozzle_id, 'pressure': pressure, 'temp': temperature}:
+            case {'nozzle_id': nozzle_id, 'pressure': pressure, 'temp': temperature} if pressure > 1.2 and temperature > 400:
+                return ("Витік палива і перегрів сопла") 
+            case {'nozzle_id': nozzle_id, 'pressure': pressure, 'temp': temperature} if pressure <= 1.2 and temperature > 400:
+                return ("Перегрів сопла")
+            case {'nozzle_id': nozzle_id, 'pressure': pressure, 'temp': temperature} if pressure > 1.2 and temperature <= 400:
+                return ("Витік палива")
+            case {'nozzle_id': nozzle_id, 'pressure': pressure, 'temp': temperature} if pressure <= 1.2 and temperature <= 400:
+                return ("Сопло в нормі")
+            case _:
+                return ("Невідповідні вхідні дані")
 
 # Задача 3: Перевірка цілісності пакета (for / else)
 def verify_telemetry_packet(packet: list) -> str:
