@@ -12,16 +12,18 @@ def check_entry_angle(angle: float) -> str:
     - gamma < -7.5 -> "Перегрів та руйнування"
     - -7.5 <= gamma <= -5.5 -> "Вхід успішний"
     """
-    angle = float(input("Enter the value of entrance angle: "))
     if angle > -5.5:
-        print("Рикошет від атмосфери")
         return("Рикошет від атмосфери")
     elif angle < -7.5:
-        print("Перегрів та руйнування")
         return("Перегрів та руйнування")
     else:
-        print("Вхід успішний")
         return("Вхід успішний")
+
+# Examples for input values for task 1
+print(check_entry_angle(-6.0))
+print(check_entry_angle(-4.0))
+print(check_entry_angle(-8.0)) 
+
 
 # Задача 2: Статус сопел орієнтації (match-case)
 def nozzle_stats(nozzle_id: int, pressure: float, temperature: float) -> str:
@@ -43,6 +45,11 @@ def nozzle_stats(nozzle_id: int, pressure: float, temperature: float) -> str:
             case _:
                 return ("Невідповідні вхідні дані")
 
+# Examples for input values for task 2
+print(nozzle_stats(1, 1.5, 450)) 
+print(nozzle_stats(2, 1.0, 300.0))
+
+
 # Задача 3: Перевірка цілісності пакета (for / else)
 def verify_telemetry_packet(checksums: list) -> str:
     """
@@ -58,7 +65,11 @@ def verify_telemetry_packet(checksums: list) -> str:
         else:
             result = "Пакет валідний"
     return(result)
-            
+
+# Examples for input values for task 3
+print(verify_telemetry_packet([0x12, 0xAB, 0xFF, 0x04]))
+print(verify_telemetry_packet([0x12, 0xAB, 0x04, 0x05]))
+
 
 # Задача 4: Пошук втрати GPS (zip / enumerate)
 def find_gps_loss_moments(time_list: list, sats_list: list) -> list:
@@ -70,9 +81,13 @@ def find_gps_loss_moments(time_list: list, sats_list: list) -> list:
     loss_moments = []
     for index, (t, sat) in enumerate(zip(time_list, sats_list)):
         if sat < 4:
-            print(f"Індекс: {index}, Час: {t}, Кількість супутників: {sat}")
             found_count += 1
             loss_moments.append((t, sat))
             if found_count == 3:
+                print("Знайдено 3 моменти втрати GPS.")
                 break
-        return loss_moments
+    return loss_moments
+
+# Examples for input values for task 4
+print(find_gps_loss_moments([0, 1, 2, 3, 4, 5], [5, 3, 2, 6, 5, 4]))
+print(find_gps_loss_moments([0, 1, 2, 3, 4, 5], [2, 1, 3, 8, 3, 10]))
